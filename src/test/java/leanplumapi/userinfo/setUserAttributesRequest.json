@@ -1,0 +1,7 @@
+{
+  "appId": "#(appId)",
+  "clientKey": "#(prodKey)",
+  "apiVersion": "#(apiVersion)",
+  "userId": "testUserId",
+  "createDisposition": "CreateIfNeeded",
+}
