@@ -1,0 +1,38 @@
+name: Leanplum API Tests
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  schedule:
+    - cron: '30 23 * * *'
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B -DskipTests package --file pom.xml
+    - name: Run API tests
+      run: mvn clean test -DappId=${{ secrets.APPID }} -DprodKey=${{ secrets.PRODKEY }} -DexportKey=${{ secrets.EXPORTKEY }} -DdevKey=${{ secrets.DEVKEY }} -Dtest=ApiTest
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: test-results
+        path: ./target/karate-reports
+    - name: Report tests
+      uses: dorny/test-reporter@v1.5.0
+      with:
+        name: Run Tests
+        path: "./target/karate-reports/*.xml"
+        reporter: java-junit
+

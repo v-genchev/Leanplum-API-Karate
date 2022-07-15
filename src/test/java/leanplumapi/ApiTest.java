@@ -10,6 +10,8 @@ public class ApiTest {
     @Test
     void testParallel() {
         Results results = Runner.path("classpath:leanplumapi")
+                .outputCucumberJson(true)
+                .outputJunitXml(true)
                 .parallel(5);
         assertEquals(0, results.getFailCount(), results.getErrorMessages());
     }
