@@ -25,7 +25,9 @@ In order to execute the test cases locally you either need to
 ## Simple Workflow for executing the API test cases
 
 - Triggered on pull request to the main branch and in 23:30 UTC every day
-- Still needs some kind of adequate reporting being published. For now only the results from the Karate run are uploaded as artifacts
+- Karate report is uploaded in the artifacts. Also when you go to the Run Tests job, you could see the report integrated
+<img width="929" alt="image" src="https://user-images.githubusercontent.com/61762311/179342030-99f7188f-dda3-4cf5-8756-e9d290b737a5.png">
+
 
    
 
